@@ -17,7 +17,7 @@ class LoginController extends Controller
         if(Auth::attempt(['name' => $request->name, 'password' => $request->password])){ 
             $expiresIn = now()->addMinutes(config("lifetime"));
             $response = Auth::user()->createToken('Onfly', ['*'], $expiresIn)->plainTextToken;
-            return response(["Bearer Token" =>$response , "expiresIn" => $expiresIn],);
+            return response(["token" =>$response , "expiresIn" => $expiresIn],);
         }
         else{
             return response(["message" => 'Usuário ou senha inválidos'], 401);
